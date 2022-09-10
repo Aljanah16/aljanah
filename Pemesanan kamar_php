@@ -1,0 +1,81 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 //EN">
+<html>
+<head>
+       <title>Penginapan</title>
+</head>
+<body>
+<form action="outputpenginapan.php" method="POST">
+<h1>PENGINAPAN BUKIT INDAH<br>
+FORM PEMESANAN KAMAR</h1>
+<hr>
+<pre>
+Kode Kamar  : <input type="text" name="kode">
+Nama Kamar  : <input type="text" name="nama">
+Jenis Kamar : <select name="jenis">
+              <option value="Single room">Single Room
+              <option value="Double room">Double Room
+              <option value="Family room">Family Room
+              </select>
+Type Kamar  : <input type="radio" name="tipe" value="VIP">VIP
+              <input type="radio" name="tipe" value="VVIP">VVIP
+Banyak Sewa : <input type="text" name="sewa">
+Lama Sewa   : <input type="text" name="lama">
+
+<input type="submit" value="Proses"> <input type="reset" value="Batal">
+</form>
+
+</body>
+</html>
+
+<!doctype html public "-//W3C//DTD HTML 4.0 //EN">
+<html>
+<head>
+       <title>Penginapan</title>
+</head>
+<body>
+<h1> Kamar Pesanan</h1>
+<?php
+     $kode=$_POST['kode'];
+     $nama=$_POST['nama'];
+     $jenis=$_POST['jenis'];
+     $tipe=$_POST['tipe'];
+     $sewa=$_POST['sewa'];
+     $lama=$_POST['lama'];
+    
+if ($jenis=="Single room"){
+    $harga=150000;
+    }
+else if ($jenis=="Double room room"){
+    $harga=200000;
+    }
+else {
+    $harga=300000;
+    }
+$subtotal=$harga*$lama*$sewa;
+if ($tipe=="VVIP"){
+    $diskon=0.10*$subtotal;
+    }
+else {
+    $diskon=0;
+    }
+$total=$subtotal-$diskon;
+
+?>
+<pre>
+Kode Kamar   : <?php echo $kode; ?> <br>
+Nama Kamar   : <?php echo $nama; ?> <br>
+Jenis Kamar  : <?php echo $jenis; ?> <br>
+Type Kamar   : <?php echo $tipe; ?> <br>
+Tarif Sewa   : <?php echo "Rp.".number_format($harga); ?> <br>
+Banyak Sewa  : <?php echo $sewa; ?> Hari <br>
+Lama Sewa    : <?php echo $lama; ?> Hari <br>
+======================================== <br>
+Subtotal     : <?php echo "Rp.".number_format($subtotal); ?> <br>
+Diskon       : <?php echo "Rp.".number_format($diskon); ?> <br>
+Total        : <?php echo "Rp.".number_format($total); ?> <br>
+<pre>
+<br>
+<a href="inputpenginapan.php">Booking Lagi</a>
+
+</body>
+</html>
